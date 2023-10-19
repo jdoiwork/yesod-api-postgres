@@ -46,10 +46,18 @@ instance ToJSON HomeResponse
 getHomeR :: Handler JsonValue
 getHomeR = returnJson $ defaultHomeResponse { message = "hello" }
 
+
+data UsersResponse
+    = UsersResponse
+    { users :: [User]
+    } deriving (Show, Generic)
+
+instance ToJSON UsersResponse
+
 getUsersR :: Handler JsonValue
 getUsersR = do
     users <- runDB getUsers
-    returnJson $ map entityVal users
+    returnJson $ UsersResponse { users = map entityVal users }
 
 
 runApp :: Int -> MyAppEnv -> IO ()

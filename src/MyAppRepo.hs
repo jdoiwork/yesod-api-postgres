@@ -3,7 +3,7 @@
 {-# LANGUAGE DataKinds #-}
 
 
-module MyAppRepo (getUsers, withPool) where
+module MyAppRepo (getUsers, withPool, User(..)) where
 
 import Data.Pool (Pool)
 import Database.Persist
