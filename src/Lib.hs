@@ -1,7 +1,3 @@
-{-# LANGUAGE OverloadedStrings     #-}
-{-# LANGUAGE QuasiQuotes           #-}
-{-# LANGUAGE TemplateHaskell       #-}
-{-# LANGUAGE TypeFamilies          #-}
 module Lib
     ( HelloWorld(..)
     , runApp
@@ -9,6 +5,8 @@ module Lib
 
 
 import           Yesod
+import Data.Text qualified as T
+import GHC.Generics
 
 data HelloWorld = HelloWorld
 
@@ -18,8 +16,17 @@ mkYesod "HelloWorld" [parseRoutes|
 
 instance Yesod HelloWorld
 
-getHomeR :: Handler Html
-getHomeR = defaultLayout [whamlet|Hello World!|]
+data HomeResponse
+    = HomeResponse
+    { message :: T.Text
+    } deriving (Generic, Show)
+
+
+instance ToJSON HomeResponse
+
+getHomeR :: Handler Value
+getHomeR = returnJson $ HomeResponse "hello"
 
 runApp :: Int -> IO ()
 runApp port = warp port HelloWorld
+
