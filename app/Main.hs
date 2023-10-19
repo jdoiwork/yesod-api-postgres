@@ -1,6 +1,7 @@
 module Main (main) where
 
 import Lib
+-- import Yesod
 
 main :: IO ()
-main = someFunc
+main = runApp 3000
