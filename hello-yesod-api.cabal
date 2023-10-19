@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       Lib
+      MyAppEnv
   other-modules:
       Paths_hello_yesod_api
   autogen-modules:
@@ -44,6 +45,7 @@ library
   build-depends:
       aeson
     , base >=4.7 && <5
+    , dotenv
     , text
     , yesod
   default-language: GHC2021
@@ -68,6 +70,7 @@ executable hello-yesod-api-exe
   build-depends:
       aeson
     , base >=4.7 && <5
+    , dotenv
     , hello-yesod-api
     , text
     , yesod
@@ -94,6 +97,7 @@ test-suite hello-yesod-api-test
   build-depends:
       aeson
     , base >=4.7 && <5
+    , dotenv
     , hello-yesod-api
     , text
     , yesod

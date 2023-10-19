@@ -4,9 +4,10 @@ module Lib
     ) where
 
 
-import           Yesod
+import Yesod
 import Data.Text qualified as T
-import GHC.Generics
+import GHC.Generics ( Generic )
+import MyAppEnv
 
 type JsonValue = Value
 
@@ -21,13 +22,19 @@ instance Yesod MyApp
 data HomeResponse
     = HomeResponse
     { message :: T.Text
+    , ok :: Bool
     } deriving (Generic, Show)
+
+defaultHomeResponse :: HomeResponse
+defaultHomeResponse = HomeResponse "" False
 
 instance ToJSON HomeResponse
 
 getHomeR :: Handler JsonValue
-getHomeR = returnJson $ HomeResponse "hello"
+getHomeR = returnJson $ defaultHomeResponse { message = "hello" }
 
-runApp :: Int -> IO ()
-runApp port = warp port MyApp
+runApp :: Int -> MyAppEnv -> IO ()
+runApp port env = do
+    print env
+    warp port MyApp
 
