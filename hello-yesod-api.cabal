@@ -27,6 +27,7 @@ library
   exposed-modules:
       Lib
       MyAppEnv
+      MyAppRepo
   other-modules:
       Paths_hello_yesod_api
   autogen-modules:
@@ -45,8 +46,16 @@ library
   build-depends:
       aeson
     , base >=4.7 && <5
+    , bytestring
+    , conduit
     , dotenv
+    , monad-logger
+    , persistent
+    , persistent-postgresql
+    , resource-pool
+    , shakespeare
     , text
+    , transformers
     , yesod
   default-language: GHC2021
 
@@ -70,9 +79,17 @@ executable hello-yesod-api-exe
   build-depends:
       aeson
     , base >=4.7 && <5
+    , bytestring
+    , conduit
     , dotenv
     , hello-yesod-api
+    , monad-logger
+    , persistent
+    , persistent-postgresql
+    , resource-pool
+    , shakespeare
     , text
+    , transformers
     , yesod
   default-language: GHC2021
 
@@ -97,8 +114,16 @@ test-suite hello-yesod-api-test
   build-depends:
       aeson
     , base >=4.7 && <5
+    , bytestring
+    , conduit
     , dotenv
     , hello-yesod-api
+    , monad-logger
+    , persistent
+    , persistent-postgresql
+    , resource-pool
+    , shakespeare
     , text
+    , transformers
     , yesod
   default-language: GHC2021

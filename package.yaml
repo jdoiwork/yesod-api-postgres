@@ -25,8 +25,16 @@ dependencies:
 - base >= 4.7 && < 5
 - yesod
 - text
+- bytestring
+- shakespeare
 - aeson
 - dotenv
+- resource-pool
+- monad-logger
+- conduit
+- persistent
+- persistent-postgresql
+- transformers
 
 ghc-options:
 - -Wall
