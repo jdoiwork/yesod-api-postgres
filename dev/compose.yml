@@ -1,0 +1,25 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-container
+    environment:
+      POSTGRES_USER: "${PG_USER:-postgres}"
+      POSTGRES_PASSWORD: "${PG_PASSWORD:-password}"
+      POSTGRES_DB: "${DB_NAME:-myapp_db}"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-container
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "${PGADMIN_EMAIL:-pgadmin@example.com}"
+      PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_PASSWORD:-password}"
+    ports:
+      - "5050:80"
+
+volumes:
+  postgres-data:
