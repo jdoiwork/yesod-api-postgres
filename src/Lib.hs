@@ -1,5 +1,5 @@
 module Lib
-    ( HelloWorld(..)
+    ( MyApp(..)
     , runApp
     ) where
 
@@ -8,25 +8,26 @@ import           Yesod
 import Data.Text qualified as T
 import GHC.Generics
 
-data HelloWorld = HelloWorld
+type JsonValue = Value
 
-mkYesod "HelloWorld" [parseRoutes|
+data MyApp = MyApp
+
+mkYesod "MyApp" [parseRoutes|
 / HomeR GET
 |]
 
-instance Yesod HelloWorld
+instance Yesod MyApp
 
 data HomeResponse
     = HomeResponse
     { message :: T.Text
     } deriving (Generic, Show)
 
-
 instance ToJSON HomeResponse
 
-getHomeR :: Handler Value
+getHomeR :: Handler JsonValue
 getHomeR = returnJson $ HomeResponse "hello"
 
 runApp :: Int -> IO ()
-runApp port = warp port HelloWorld
+runApp port = warp port MyApp
 
